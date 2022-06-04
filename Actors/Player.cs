@@ -43,7 +43,7 @@ namespace ProjectBones
         public Player(Controller ctrl, int id = 0) : base("hero", 16, 16)
         {
             IsActive = true;
-            maxSpeed = 4;
+            maxSpeed = 8;
             isFirePressed = false;
             RigidBody.Collider = ColliderFactory.CreateBoxFor(this);
             RigidBody.Type = RigidBodyType.PLAYER;
@@ -166,7 +166,9 @@ namespace ProjectBones
                 {
                     isClicked = false;
                     Vector2 mousePos = Game.Win.MousePosition;
-                    List<Node> path = ((PlayScene)Game.CurrentScene).Map.GetPath((int)Position.X, (int)Position.Y, (int)mousePos.X, (int)mousePos.Y);
+                    Vector2 mouseAbsolutePosition = CameraMngr.MainCamera.position - CameraMngr.MainCamera.pivot + Game.Win.MousePosition;
+
+                    List<Node> path = ((PlayScene)Game.CurrentScene).Map.GetPath((int)Position.X, (int)Position.Y, (int)mouseAbsolutePosition.X, (int)mouseAbsolutePosition.Y);
                     Agent.SetPath(path);
                 }
             }
@@ -179,7 +181,7 @@ namespace ProjectBones
         public override void Update()
         {
             Agent.Update(maxSpeed);
-            Console.WriteLine(Forward);
+            Console.WriteLine(Game.Win.MousePosition);
             #region Ground
             //float groundY = ((PlayScene)Game.CurrentScene).GroundY;
 

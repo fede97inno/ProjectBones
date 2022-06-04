@@ -43,7 +43,7 @@ namespace ProjectBones
             //HalfHeight = (int)(texture.Height * 0.5f);
 
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
-
+            
             Layer = layer;
 
             components = new Dictionary<ComponentType, Component>();

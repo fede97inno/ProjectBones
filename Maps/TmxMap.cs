@@ -59,8 +59,8 @@ namespace ProjectBones
             XmlNode tilesetNode = mapNode.SelectSingleNode("tileset");
             int tilesetTileW = GetIntAttribute(tilesetNode, "tilewidth");
             int tilesetTileH = GetIntAttribute(tilesetNode, "tileheight");
-            int spacing = GetIntAttribute(tilesetNode, "spacing");
-            int margin = GetIntAttribute(tilesetNode, "margin");
+            int spacing = 0;//GetIntAttribute(tilesetNode, "spacing");
+            int margin = 0;//GetIntAttribute(tilesetNode, "margin");
             int tileCount = GetIntAttribute(tilesetNode, "tilecount");
             int tilesetCols = GetIntAttribute(tilesetNode, "columns");
             int tilesetRows = tileCount / tilesetCols;

@@ -41,14 +41,14 @@ namespace ProjectBones
         {
             LoadAssets();
 
-            //CameraLimits cameraLimits = new CameraLimits(Game.Win.OrthoWidth * 1.23f, Game.Win.OrthoWidth * 0.5f, Game.Win.OrthoHeight * 0.5f, Game.Win.OrthoHeight * 0.4f);
-            //CameraMngr.Init(null, cameraLimits);
+            CameraLimits cameraLimits = new CameraLimits(Game.Win.OrthoWidth * 0.835f, Game.Win.OrthoWidth * 0.5f, Game.Win.OrthoHeight * 0.5f, Game.Win.OrthoHeight * 0.5f);
+            CameraMngr.Init(null, cameraLimits);
 
             //MinX = 1;
             // MaxX = cameraLimits.MaxX + 8;
 
             //CameraMngr.AddCamera("GUI", new Camera());          //blocked
-            //CameraMngr.AddCamera("Bg_0", cameraSpeed: 0.9f);
+           // CameraMngr.AddCamera("Bg_0", cameraSpeed: 0.9f);
             //CameraMngr.AddCamera("Bg_1", cameraSpeed: 0.95f);
 
             #region Font
@@ -63,7 +63,7 @@ namespace ProjectBones
 
             player = new Player(Game.GetContoller(0));
             player.Position = new Vector2(10.0f, 10.0f);
-            //CameraMngr.SetTarget(player);
+            CameraMngr.SetTarget(player);
 
             Controller controller = Game.GetContoller(1);
 
@@ -94,7 +94,7 @@ namespace ProjectBones
             //SpawnMngr.Init();
             //PowerUpsMngr.Init();
 
-            map = new TmxMap("Assets/Maps/map_3.tmx");
+            map = new TmxMap("Assets/Maps/map_4.tmx");
             LoadTiledMap();
             base.Start();
         }
@@ -114,7 +114,7 @@ namespace ProjectBones
 
             try
             {
-                xmlMap.Load(@".\Assets\Maps\map_3.tmx");
+                xmlMap.Load(@".\Assets\Maps\map_4.tmx");
             }
             catch (XmlException e)
             {
@@ -186,7 +186,7 @@ namespace ProjectBones
 
             //SpawnMngr.Update();
             //PowerUpsMngr.Update();
-            //CameraMngr.Update();
+            CameraMngr.Update();
             PhysicsMngr.CheckCollision();
         }
 

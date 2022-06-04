@@ -31,7 +31,7 @@ namespace ProjectBones
 
             pathSprite = new Sprite(0.25f, 0.25f);
             pathSprite.pivot = new Vector2(pathSprite.Width * 0.5f, pathSprite.Height * 0.5f);
-            pathCol = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+            pathCol = new Vector4(1.0f, 0.0f, 0.0f, 0.6f);
         }
         public virtual void SetPath(List<Node> newPath)
         {
