@@ -23,10 +23,11 @@ namespace ProjectBones
         protected float maxForce = 1.0f;
         protected float shootForce;
 
+        protected Animation animation;
         protected bool isClicked = false;
         protected bool isArrived = true;
         protected Vector2 dest;
-
+        
 
         public bool IsFalling { get { return RigidBody.Velocity.Y > 0; } }
         public int PlayerID { get { return playerID; } }
@@ -181,7 +182,24 @@ namespace ProjectBones
         public override void Update()
         {
             Agent.Update(maxSpeed);
-            Console.WriteLine(Game.Win.MousePosition);
+
+            if (Math.Sign(Forward.X) == 1 && (Math.Sign(Forward.Y) == 1 || Math.Sign(Forward.Y) == 0))
+            {
+                Console.WriteLine("RIGHT");
+            }
+            else if (Math.Sign(Forward.X) == 1 && Math.Sign(Forward.Y) == -1)
+            {
+                Console.WriteLine("UP");
+            }
+            else if (Math.Sign(Forward.X) == -1 && Math.Sign(Forward.Y) == 1)
+            {
+                Console.WriteLine("DOWN");
+            }
+            else if (Math.Sign(Forward.X) == -1 && Math.Sign(Forward.Y) == -1)
+            {
+                Console.WriteLine("LEFT");
+            }
+            Console.WriteLine(Forward.X + " " + Forward.Y);
             #region Ground
             //float groundY = ((PlayScene)Game.CurrentScene).GroundY;
 

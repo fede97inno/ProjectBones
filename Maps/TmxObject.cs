@@ -34,7 +34,7 @@ namespace ProjectBones
         {
             if(IsActive)
             {
-                sprite.DrawTexture(texture, xOff, yOff, 16, 16);
+                sprite.DrawTexture(texture, xOff, yOff, 16, 16);//32,32 con mappa raddoppiata
             }
         }
     }

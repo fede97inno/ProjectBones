@@ -24,3 +24,5 @@ C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\
 C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_1.tmx
 C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_3.tmx
 C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_4.tmx
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\pixel_pack_but_better.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_5.tmx

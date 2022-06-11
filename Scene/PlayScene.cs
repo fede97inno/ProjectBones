@@ -95,6 +95,9 @@ namespace ProjectBones
             //PowerUpsMngr.Init();
 
             map = new TmxMap("Assets/Maps/map_4.tmx");
+
+
+
             LoadTiledMap();
             base.Start();
         }
@@ -104,7 +107,10 @@ namespace ProjectBones
             GfxMngr.AddTexture("hero", "Assets/Actors/hero_idle_d.png");
             GfxMngr.AddTexture("frameBar", "Assets/Objects/loadingBar_frame.png");
             GfxMngr.AddTexture("progressBar", "Assets/Objects/loadingBar_bar.png");
+            
             GfxMngr.AddTexture("tileset", "Assets/Maps/pixel_pack.png");
+            
+            //GfxMngr.AddTexture("tileset", "Assets/Maps/pixel_pack_but_better.png");
             //GfxMngr.AddTexture("weapons_frame", "Assets/weapons_GUI_frame.png");
             //GfxMngr.AddTexture("weapon_selection", "Assets/weapon_GUI_selection.png");
         }

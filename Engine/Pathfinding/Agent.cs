@@ -59,6 +59,7 @@ namespace ProjectBones
             {
                 Vector2 dest = new Vector2(target.X + 0.5f, target.Y + 0.5f);//without pivot
                 Vector2 dir = dest - owner.Position;               //from position to destination
+
                 float distance = dir.Length;
 
                 if (distance < 0.05f)                               //when we are near the center of the node
@@ -79,7 +80,10 @@ namespace ProjectBones
                 else
                 {
                     owner.Position += dir.Normalized() * speed * Game.DeltaTime;
-                    owner.Forward = dir.Normalized();
+
+                    Vector2 newForward = new Vector2(dir.X,dir.Y);
+
+                    owner.Forward = newForward;
                 }
             }
         }

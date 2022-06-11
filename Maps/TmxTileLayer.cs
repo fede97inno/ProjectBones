@@ -94,7 +94,7 @@ namespace ProjectBones
             layerTexture.Update(mapBitmap);
 
             layerSprite = new Sprite(Game.PixelsToUnits(1024), Game.PixelsToUnits(768));
-            Console.WriteLine(layerSprite.Width + " + " + layerSprite.Height);
+            //Console.WriteLine(layerSprite.Width + " + " + layerSprite.Height);
             //layerSprite.scale = new Vector2(2.0f)
             //layerSprite.scale = new Vector2(1.42f);
             //layerSprite.position = new Vector2(1, 0);

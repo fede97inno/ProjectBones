@@ -74,7 +74,7 @@ namespace ProjectBones
         public override void Update()
         {
             base.Update();
-
+            
             //X = MathHelper.Clamp(Position.X, playScene.MinX, playScene.MaxX);
         }
 
