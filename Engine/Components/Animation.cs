@@ -20,7 +20,7 @@ namespace ProjectBones
         public int FrameWidth { get; protected set; }
         public int FrameHeight { get; protected set; }
         
-        public Animation(GameObject owner, int numFrames, int frameWidth, int frameHeight, int framePerSecond, bool loop = true) : base(owner)
+        public Animation(GameObject owner, int numFrames, int frameWidth, int frameHeight, int framePerSecond, Vector2 offset ,bool loop = true) : base(owner)
         {
             this.numFrames = numFrames;
             FrameWidth = frameWidth;
@@ -29,7 +29,7 @@ namespace ProjectBones
             Loop = loop;
 
             this.frameDuration = 1.0f / framePerSecond;
-            Offset = Vector2.Zero;
+            Offset = offset;
 
             UpdateMngr.AddItem(this);
         }

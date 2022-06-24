@@ -3,6 +3,7 @@ using Aiv.Fast2D;
 using System;
 using System.Xml;
 using System.Collections.Generic;
+using Aiv.Audio;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +16,36 @@ namespace ProjectBones
         protected static List<Player> players;
         protected static List<Tile> tiles;
         protected int alivePlayers;
-        protected int currentPlayerIndex;
+
+        protected AudioSource audioSource;
+        protected AudioClip enterClip;
+        protected AudioClip exitClip;
+        
+        protected UnderScene currentScene;
+        protected CityScene city;
+        protected CaveScene cave;
+        protected HouseScene house;
 
         protected TmxMap map;
         protected Map obstacleMap;
+
+        protected TmxMap caveMap;
+        protected Map caveObstacleMap;
+
+        protected TmxMap houseMap;
+        protected Map houseObstacleMap;
+
+        protected int currentMapIndex;
+
+        protected TmxMap currentMap;
+        protected Map currentObstacleMap;
 
         public float PlayerTimer { get; protected set; }
         public float GroundY { get; protected set; }
         public float MinX { get; set; }
         public float MaxX { get; set; }
-        public Map Map { get { return obstacleMap; } }
-        public Player CurrentPlayer { get { return players[currentPlayerIndex]; } }
+        //public Map Map { get { return currentObstacleMap; } }
+        public Map Map { get { return currentScene.Map; } }
         public List<Player> Players { get { return players; } }
 
         #region Test TextChar
@@ -44,13 +64,9 @@ namespace ProjectBones
             CameraLimits cameraLimits = new CameraLimits(Game.Win.OrthoWidth * 0.835f, Game.Win.OrthoWidth * 0.5f, Game.Win.OrthoHeight * 0.5f, Game.Win.OrthoHeight * 0.5f);
             CameraMngr.Init(null, cameraLimits);
 
-            //MinX = 1;
-            // MaxX = cameraLimits.MaxX + 8;
-
-            //CameraMngr.AddCamera("GUI", new Camera());          //blocked
-           // CameraMngr.AddCamera("Bg_0", cameraSpeed: 0.9f);
-            //CameraMngr.AddCamera("Bg_1", cameraSpeed: 0.95f);
-
+            audioSource = new AudioSource();
+            enterClip = AudioMgr.GetClip("enter");
+            exitClip = AudioMgr.GetClip("exit");
             #region Font
             FontMngr.Init();
 
@@ -62,7 +78,7 @@ namespace ProjectBones
             tiles = new List<Tile>();
 
             player = new Player(Game.GetContoller(0));
-            player.Position = new Vector2(10.0f, 10.0f);
+            player.Position = new Vector2(10.5f, 10.5f);
             CameraMngr.SetTarget(player);
 
             Controller controller = Game.GetContoller(1);
@@ -84,43 +100,63 @@ namespace ProjectBones
             players.Add(player);
 
             alivePlayers = players.Count;
-            ////CameraMngr.Target = Player;
-
-            //Enemy = new Enemy();
-            //Enemy.Position = new Vector2(8, 4);
 
 
             BulletMngr.Init();
-            //SpawnMngr.Init();
-            //PowerUpsMngr.Init();
 
-            map = new TmxMap("Assets/Maps/map_4.tmx");
+            //FirstSceneMap
+            obstacleMap = LoadTiledMap(@".\Assets\Maps\map_6.tmx");
+            city = new CityScene(obstacleMap, player);
+            currentScene = city;
 
+            //SecondSceneMap
+            caveObstacleMap = LoadTiledMap(@".\Assets\Maps\cave_map.tmx");
+            cave = new CaveScene(caveObstacleMap, player);
 
+            houseObstacleMap = LoadTiledMap(@".\Assets\Maps\house_map.tmx");
+            house = new HouseScene(houseObstacleMap, player);
 
-            LoadTiledMap();
+            currentMapIndex = 0;
+            currentMap = map;
+            currentObstacleMap = obstacleMap; 
+
             base.Start();
         }
 
         private void LoadAssets()
         {
-            GfxMngr.AddTexture("hero", "Assets/Actors/hero_idle_d.png");
+            GfxMngr.AddTexture("hero", "Assets/Actors/hero_walk_atlas.png");
+            GfxMngr.AddTexture("dog", "Assets/Actors/doggo_walk_atlas.png");
+
+            GfxMngr.AddTexture("key", "Assets/Objects/key.png");
+            GfxMngr.AddTexture("spikes", "Assets/Objects/spike.png");
+            GfxMngr.AddTexture("buttons", "Assets/Objects/buttons.png");
+            GfxMngr.AddTexture("wall", "Assets/Objects/wall.png");
+            GfxMngr.AddTexture("door", "Assets/Objects/door.png");
+            GfxMngr.AddTexture("house_door", "Assets/Objects/house_door.png");
+            GfxMngr.AddTexture("cave_door", "Assets/Objects/cave_door.png");
+
             GfxMngr.AddTexture("frameBar", "Assets/Objects/loadingBar_frame.png");
             GfxMngr.AddTexture("progressBar", "Assets/Objects/loadingBar_bar.png");
             
             GfxMngr.AddTexture("tileset", "Assets/Maps/pixel_pack.png");
-            
-            //GfxMngr.AddTexture("tileset", "Assets/Maps/pixel_pack_but_better.png");
-            //GfxMngr.AddTexture("weapons_frame", "Assets/weapons_GUI_frame.png");
-            //GfxMngr.AddTexture("weapon_selection", "Assets/weapon_GUI_selection.png");
+
+            AudioMgr.AddClip("key", "Assets/Audio/achieved.ogg");
+            AudioMgr.AddClip("enter", "Assets/Audio/stair_down.ogg");
+            AudioMgr.AddClip("exit", "Assets/Audio/stair_up.ogg");
+            AudioMgr.AddClip("wallMoving", "Assets/Audio/wall.wav");
+            AudioMgr.AddClip("openDoor", "Assets/Audio/Key Jiggle.wav");
+            AudioMgr.AddClip("noKey", "Assets/Audio/hurt.ogg");
         }
-        private void LoadTiledMap()
+        private Map LoadTiledMap(string filePath)
         {
+            Map maped = null;
+
             XmlDocument xmlMap = new XmlDocument();
 
             try
             {
-                xmlMap.Load(@".\Assets\Maps\map_4.tmx");
+                xmlMap.Load(filePath);
             }
             catch (XmlException e)
             {
@@ -170,9 +206,10 @@ namespace ProjectBones
                     int width = int.Parse(layerNode.Attributes.GetNamedItem("width").Value);
                     int height = int.Parse(layerNode.Attributes.GetNamedItem("height").Value);
 
-                    obstacleMap = new Map(width, height, map);
+                    maped = new Map(width, height, map);
                 }
             }
+            return maped;
         }
         public override void Input()
         {
@@ -190,23 +227,77 @@ namespace ProjectBones
             PhysicsMngr.Update();
             UpdateMngr.Update();
 
-            //SpawnMngr.Update();
-            //PowerUpsMngr.Update();
             CameraMngr.Update();
             PhysicsMngr.CheckCollision();
+
+            currentScene.Update();
+
+            if (currentScene is CityScene)
+            {
+                if (player.Position == new Vector2(48.5f, 13.5f))
+                {
+                    player.Position = new Vector2(10.5f, 18.5f);
+                    player.ResetPath(new Vector2(10.5f, 18.5f));
+                    audioSource.Play(enterClip);
+                    currentScene.OnExit();
+                    currentScene = cave;
+                    currentScene.OnEnter();
+                }
+
+                if (player.Position == new Vector2(4.5f, 14.5f))
+                {
+                    player.Position = new Vector2(7.5f, 13.5f);
+                    player.ResetPath(new Vector2(7.5f, 13.5f));
+                    audioSource.Play(enterClip);
+                    currentScene.OnExit();
+                    currentScene = house;
+                    currentScene.OnEnter();
+                }
+            }
+            else if (currentScene is CaveScene)
+            {
+                if (player.Position == new Vector2(10.5f, 19.5f))
+                {
+                    player.Position = new Vector2(48.5f, 14.5f);
+                    player.ResetPath(new Vector2(48.5f, 14.5f));
+                    audioSource.Play(exitClip);
+                    currentScene.OnExit();
+                    currentScene = city;
+                    currentScene.OnEnter();
+                }
+            }
+            else if (currentScene is HouseScene)
+            {
+                if (player.Position == new Vector2(7.5f, 14.5f))
+                {
+                    player.Position = new Vector2(4.5f, 15.5f);
+                    player.ResetPath(new Vector2(48.5f, 22.5f));
+                    audioSource.Play(exitClip);
+                    currentScene.OnExit();
+                    currentScene = city;
+                    currentScene.OnEnter();
+                }
+
+                if (player.Position.X > 9 && player.Position.Y < 7)
+                {
+                    isPlaying = false;
+                }
+            }
         }
 
         public override void Draw()
         {
+            currentScene.Draw();
             DrawMngr.Draw();
-            //DebugMngr.Draw();
         }
-
+        public void SetMap(TmxMap tmx, Map map)
+        {
+            currentMap = tmx;
+            currentObstacleMap = map;
+        }
         public override Scene OnExit()
         {
-            //BulletMngr.ClearAll();
-            //SpawnMngr.ClearAll();
-            PowerUpsMngr.ClearAll();
+            CameraMngr.ClearAll();
             UpdateMngr.ClearAll();
             PhysicsMngr.ClearAll();
             DrawMngr.ClearAll();

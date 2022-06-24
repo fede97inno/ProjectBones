@@ -42,7 +42,7 @@ namespace ProjectBones
                 target = path[0];                                   //we put target in the first node og the path
                 path.RemoveAt(0);                                   //and we remove it
             }
-            else if(path.Count > 0)
+            else if (path.Count > 0)
             {
                 int dist = Math.Abs(path[0].X - target.X) + Math.Abs(path[0].Y - target.Y);
 
@@ -53,7 +53,7 @@ namespace ProjectBones
             }
         }
 
-        public virtual void Update(float speed)
+        public virtual void Update(float speed, ref AnimationPlayer animation)
         {
             if (target != null)
             {
@@ -66,7 +66,6 @@ namespace ProjectBones
                 {
                     current = target;
                     owner.Position = dest;
-
                     if (path.Count == 0)
                     {
                         target = null;
@@ -81,9 +80,48 @@ namespace ProjectBones
                 {
                     owner.Position += dir.Normalized() * speed * Game.DeltaTime;
 
-                    Vector2 newForward = new Vector2(dir.X,dir.Y);
 
-                    owner.Forward = newForward;
+                    //if (target.X + 0.5f > owner.Position.X)
+                    //{
+                    //    Console.WriteLine("RIGHT");
+                    //}
+                    //else if (target.X + 0.5f < owner.Position.X )
+                    //{
+                    //    Console.WriteLine("LEFT");
+                    //}
+                    //else if (target.Y + 0.5f < owner.Position.Y)
+                    //{
+                    //    Console.WriteLine("UP");
+                    //}
+                    //else if ( target.Y + 0.5f > owner.Position.Y)
+                    //{
+                    //    Console.WriteLine("DOWN");
+                    //}
+
+                    //Vector2 newForward = new Vector2(dir.X,dir.Y);
+
+                    //owner.Forward = newForward;
+                }
+
+                if (target == null)
+                {
+                    animation = AnimationPlayer.IDLE;
+                }
+                else if (-target.X - 0.5f + owner.Position.X < 0 && owner.Y - 0.5f - target.Y == 0)
+                {
+                    animation = AnimationPlayer.RIGHT;
+                }
+                else if (-target.X - 0.5f + owner.Position.X > 0 && owner.Y - 0.5f - target.Y == 0)
+                {
+                    animation = AnimationPlayer.LEFT;
+                }
+                else if (-target.X - 0.5f + owner.Position.X == 0 && owner.Y - 0.5f - target.Y < 0)
+                {
+                    animation = AnimationPlayer.DOWN;
+                }
+                else if (-target.X - 0.5f + owner.Position.X == 0 && owner.Y - 0.5f - target.Y > 0)
+                {
+                    animation = AnimationPlayer.UP;
                 }
             }
         }
@@ -99,7 +137,7 @@ namespace ProjectBones
             {
                 foreach (Node n in path)
                 {
-                    pathSprite.position = new Vector2(n.X +0.5f, n.Y + 0.5f);
+                    pathSprite.position = new Vector2(n.X + 0.5f, n.Y + 0.5f);
                     pathSprite.DrawColor(pathCol);
                 }
             }

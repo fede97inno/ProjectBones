@@ -13,7 +13,6 @@ namespace ProjectBones
         public EnemyBullet() : base("bullet")
         {
             Type = BulletType.EnemyBullet;
-            RigidBody.Type = RigidBodyType.ENEMYBULLET;
             RigidBody.AddCollisionType(RigidBodyType.PLAYERBULLET | RigidBodyType.PLAYER);
             sprite.SetAdditiveTint(150.0f, 60.0f, 20.0f, 0.0f);
         }

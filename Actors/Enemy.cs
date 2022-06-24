@@ -39,7 +39,7 @@ namespace ProjectBones
         {
             bulletType = BulletType.EnemyBullet;
 
-            RigidBody.Type = RigidBodyType.ENEMY;
+            //RigidBody.Type = RigidBodyType.ENEMY;
             RigidBody.Collider = ColliderFactory.CreateCircleFor(this);
 
             chaseRadius = 5.0f;

@@ -23,7 +23,7 @@ namespace ProjectBones
         public override void Start()
         {
             texture = new Texture(texturePath);
-            sprite = new Sprite(Game.Win.Width, Game.Win.Height);
+            sprite = new Sprite(Game.Win.OrthoWidth, Game.Win.OrthoHeight);
 
             base.Start();
         }
@@ -42,8 +42,6 @@ namespace ProjectBones
 
         public override Scene OnExit()
         {
-            texture = null;
-            sprite = null;
 
             return base.OnExit();
         }

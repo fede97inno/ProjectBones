@@ -57,7 +57,6 @@ namespace ProjectBones
 
         public static void ClearAll()
         {
-            items.Clear();
         }
     }
 }

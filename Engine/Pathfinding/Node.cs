@@ -10,7 +10,7 @@ namespace ProjectBones
     {
         public int X { get; }
         public int Y { get; }
-        public int Cost { get; }
+        public int Cost { get; protected set; }
         public List<Node> Neighbours { get; }
 
         public Node(int x, int y, int cost)
@@ -28,6 +28,11 @@ namespace ProjectBones
         public void RemoveNeighbour(Node neighbour)
         {
             Neighbours.Remove(neighbour);
+        }
+
+        public void SetCost(int cost)
+        {
+            Cost = cost;
         }
     }
 }

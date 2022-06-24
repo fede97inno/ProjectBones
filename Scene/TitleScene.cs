@@ -24,7 +24,8 @@ namespace ProjectBones
         public override void Start()
         {
             texture = new Texture(texturePath);
-            sprite = new Sprite(Game.Win.Width, Game.Win.Height);
+            sprite = new Sprite(Game.Win.OrthoWidth * 2, Game.Win.OrthoHeight);
+            sprite.position = new Vector2(-8.0f,0.0f);
 
             base.Start();
         }

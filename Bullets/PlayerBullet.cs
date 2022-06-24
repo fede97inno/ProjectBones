@@ -14,14 +14,12 @@ namespace ProjectBones
         {
             Type = BulletType.PlayerBullet;
             RigidBody.Type = RigidBodyType.PLAYERBULLET;
-            RigidBody.AddCollisionType(RigidBodyType.ENEMYBULLET | RigidBodyType.ENEMY | RigidBodyType.PLAYER | RigidBodyType.TILE);
+            //RigidBody.AddCollisionType(RigidBodyType.ENEMY | RigidBodyType.PLAYER | RigidBodyType.TILE);
             
             sprite.scale = new Vector2(1.25f);
 
             shootSound = new SoundEmitter(this, "shoot");
             components.Add(ComponentType.SOUNDEMITTER, shootSound);
         }
-
-        
     }
 }

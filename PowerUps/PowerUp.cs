@@ -13,11 +13,11 @@ namespace ProjectBones
         public PowerUp(string textureName) : base(textureName)
         {
             RigidBody = new RigidBody(this);
-            RigidBody.Type = RigidBodyType.POWERUP;
+            //RigidBody.Type = RigidBodyType.POWERUP;
             RigidBody.IsCollisionAffected = true;
 
             RigidBody.Collider = ColliderFactory.CreateCircleFor(this);
-            RigidBody.AddCollisionType(RigidBodyType.PLAYER | RigidBodyType.ENEMY);
+           // RigidBody.AddCollisionType(RigidBodyType.PLAYER | RigidBodyType.ENEMY);
 
             DebugMngr.AddItem(RigidBody.Collider);
         }

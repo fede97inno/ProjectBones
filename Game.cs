@@ -11,7 +11,12 @@ namespace ProjectBones
 {
     static class Game
     {
-        static Window window;
+        private static Window window;
+
+        private static AudioDevice playerEar;
+        private static AudioSource bgAudio;
+        private static AudioClip bgAudioClip;
+
         public static Scene CurrentScene { get; private set; }
 
         static KeyboardController keyboardCtrl;
@@ -19,6 +24,7 @@ namespace ProjectBones
         public static float DeltaTime { get { return window.DeltaTime; } }
         public static Window Win { get { return window; } }
         public static Vector2 ScreenCenter { get; private set; }
+
         public static float HalfDiagonalSquared { get { return ScreenCenter.LengthSquared; } }
         public static float UnitSize { get; private set; }
         public static float OptimalScreenHeight { get; private set; }
@@ -28,7 +34,12 @@ namespace ProjectBones
             window = new Window(768, 768, "ProjectBones");              //true dopo il nome setta il FullScreen
             Win.SetVSync(false);
             Win.SetDefaultViewportOrthographicSize(48);
-
+            
+            playerEar = new AudioDevice();
+            bgAudio = new AudioSource();
+            bgAudio.Volume = 0.06f;
+            bgAudioClip = AudioMgr.AddClip("background", "Assets/Audio/Forest Whisper.wav");
+            
             OptimalScreenHeight = 768;                             //best resolution
             UnitSize = window.Height / window.OrthoHeight;
             OptimalUnitSize = OptimalScreenHeight / window.OrthoHeight;     //rimane 108 anche se cambio risoluzione perchè calcola in base a OptimalScreenHeight che è la risoluzione base scelta per il gioco
@@ -37,11 +48,11 @@ namespace ProjectBones
 
             #region Scene
             PlayScene playScene = new PlayScene();
-            //TitleScene titleScene = new TitleScene("Assets/aivBg.png");
-            //GameOverScene gameOverScene = new GameOverScene("Assets/gameOverBg.png", playScene);
-            //titleScene.NextScene = playScene;
-            playScene.NextScene = null;
-            CurrentScene = playScene;
+            TitleScene titleScene = new TitleScene("Assets/Objects/backg.jpg");
+            TitleScene endTitleScene = new TitleScene("Assets/Objects/backgr.jpg");
+            titleScene.NextScene = playScene;
+            playScene.NextScene = endTitleScene;
+            CurrentScene = titleScene;
             #endregion
 
             #region Controllers
@@ -97,7 +108,7 @@ namespace ProjectBones
         public static void Play()
         {
             CurrentScene.Start();
-
+            bgAudio.Play(bgAudioClip);
             while (window.IsOpened)
             {
                 if (!CurrentScene.isPlaying)

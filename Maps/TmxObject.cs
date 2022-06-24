@@ -19,6 +19,9 @@ namespace ProjectBones
             xOff = offsetX;
             yOff = offsetY;
             sprite.pivot = new OpenTK.Vector2(0,0);
+
+            solid = false;
+
             if(solid)
             {
                 RigidBody = new RigidBody(this);
@@ -26,16 +29,25 @@ namespace ProjectBones
                 RigidBody.Collider.Offset = new OpenTK.Vector2(HalfWidth, HalfHeight);
                 RigidBody.Type = RigidBodyType.TILE;
             }
-            DebugMngr.AddItem(RigidBody.Collider);
+
             IsActive = true;
         }
 
         public override void Draw()
         {
-            if(IsActive)
+            if (IsActive)
             {
                 sprite.DrawTexture(texture, xOff, yOff, 16, 16);//32,32 con mappa raddoppiata
             }
+        }
+
+        public void DisableObject()
+        {
+            IsActive = false;
+        }
+        public void EnableObject()
+        {
+            IsActive = true;
         }
     }
 }

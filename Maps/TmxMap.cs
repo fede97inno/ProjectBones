@@ -8,7 +8,7 @@ using Aiv.Fast2D;
 
 namespace ProjectBones
 {
-    class TmxMap : I_Drawable
+    class TmxMap //: I_Drawable
     {
         private string tmxFilePath;
         public DrawLayer Layer { get; }
@@ -20,14 +20,14 @@ namespace ProjectBones
         // MultiLayers
         TmxTileLayer[] tileLayers;
 
-
+        TmxTileObjectLayer tileObjectLayer;
 
         public TmxMap(string filePath)
         {
             // Map Drawing Settings
             Layer = DrawLayer.BACKGROUND;
 
-            DrawMngr.AddItem(this);
+            //DrawMngr.AddItem(this);
 
             // CREATE AND LOAD XML DOCUMENT FROM TMX MAP FILE
             tmxFilePath = filePath;
@@ -78,7 +78,7 @@ namespace ProjectBones
 
                 if (layerName == "Layer_object")
                 {
-                    TmxTileObjectLayer tileObjectLayer = new TmxTileObjectLayer(layersNodes[i], tilesetNode, tileset);
+                    tileObjectLayer = new TmxTileObjectLayer(layersNodes[i], tilesetNode, tileset);
                 }
                 else
                 {
@@ -87,6 +87,14 @@ namespace ProjectBones
             }
         }
 
+        public void DisableObjects()
+        {
+            tileObjectLayer.DisableObjects();
+        }
+        public void EnableObjects()
+        {
+            tileObjectLayer.EnableObjects();
+        }
         public static int GetIntAttribute(XmlNode node, string attrName)
         {
             return int.Parse(GetStringAttribute(node, attrName));

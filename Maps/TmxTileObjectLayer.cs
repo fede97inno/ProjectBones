@@ -57,5 +57,26 @@ namespace ProjectBones
                 }
             }
         }
+        public void DisableObjects()
+        {
+            for (int i = 0; i < objects.Length; i++)
+            {
+                if (objects[i] != null)
+                {
+                    objects[i].DisableObject(); 
+                }
+            }
+        }
+
+        public void EnableObjects()
+        {
+            for (int i = 0; i < objects.Length; i++)
+            {
+                if (objects[i] != null)
+                {
+                    objects[i].EnableObject();
+                }
+            }
+        }
     }
 }

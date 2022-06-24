@@ -7,13 +7,14 @@ using OpenTK;
 
 namespace ProjectBones
 {
-    enum RigidBodyType { PLAYER = 1, PLAYERBULLET = 2, ENEMY = 4, ENEMYBULLET = 8, TILE = 16, POWERUP = 32, LAST}
+    enum RigidBodyType { PLAYER = 1, PLAYERBULLET = 2, SPIKE = 4, DOOR = 8, TILE = 16, KEY = 32, BUTTON = 64, LAST}
     class RigidBody
     {
         public GameObject GameObject;
         public Collider Collider;
         public bool IsGravityAffected = false;
         public bool IsCollisionAffected = true;
+        public bool IsMovingWithAStar = false;
         public float Friction = 0;
         public Vector2 Velocity;
         
@@ -31,21 +32,23 @@ namespace ProjectBones
         }
         public virtual void Update()
         {
-            if (IsGravityAffected)
+            if (!IsMovingWithAStar)
             {
-                Velocity.Y += PhysicsMngr.G * Game.DeltaTime;   //accelerati verso il basso
-            }
-
-            if (GameObject is Actor)
-            {
-                if (((Actor)GameObject).IsGrounded)
+                if (IsGravityAffected)
                 {
-                    ApplyFriction();
-                } 
-            }
-           
+                    Velocity.Y += PhysicsMngr.G * Game.DeltaTime;   //accelerati verso il basso
+                }
 
-            GameObject.Position += Velocity * Game.DeltaTime;
+                if (GameObject is Actor)
+                {
+                    if (((Actor)GameObject).IsGrounded)
+                    {
+                        ApplyFriction();
+                    }
+                }
+
+                GameObject.Position += Velocity * Game.DeltaTime; 
+            }
         }
         public bool Collides(RigidBody other, ref Collision collisionInfo)
         {

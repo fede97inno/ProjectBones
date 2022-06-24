@@ -26,3 +26,25 @@ C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\
 C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_4.tmx
 C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\pixel_pack_but_better.png
 C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_5.tmx
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\cave_map.tmx
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\map_6.tmx
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Actors\hero_walk_atlas.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Actors\doggo_walk_atlas.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\door.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\cave_door.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\house_door.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Maps\house_map.tmx
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\key.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\wall.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\buttons.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\Forest Whisper.wav
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\backg.jpg
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\achieved.ogg
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\stair_down.ogg
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\stair_up.ogg
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\wall.wav
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\Key Jiggle.wav
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\gameOverBg.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\backgr.jpg
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Objects\spike.png
+C:\Users\innof\OneDrive\Desktop\ProjectBones\ProjectBones\bin\Debug\Assets\Audio\hurt.ogg

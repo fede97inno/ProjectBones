@@ -143,5 +143,10 @@ namespace ProjectBones
             MainCamera.position.Y = MathHelper.Clamp(MainCamera.position.Y, CameraLimits.MinY, CameraLimits.MaxY);
         }
 
+        public static void ClearAll()
+        {
+            cameras.Clear();
+            MainCamera = null;
+        }
     }
 }

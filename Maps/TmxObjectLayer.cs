@@ -34,6 +34,7 @@ namespace ProjectBones
 
                 objects[i] = new TmxObject(objId, objXOff, objYOff, objW, objH, solid);
                 objects[i].Position = new OpenTK.Vector2(objX, objY);
+
             }
         }
     }

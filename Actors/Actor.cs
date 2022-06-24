@@ -80,7 +80,7 @@ namespace ProjectBones
 
         public override void OnCollide(Collision collisionInfo)
         {
-            OnWallCollides(collisionInfo);
+            //OnWallCollides(collisionInfo);
         }
 
         protected virtual void OnWallCollides(Collision collisionInfo)

@@ -69,6 +69,7 @@
     <Compile Include="Controllers\JoypadController.cs" />
     <Compile Include="Controllers\KeyboardController.cs" />
     <Compile Include="Controllers\KeysList.cs" />
+    <Compile Include="Engine\AudioMgr.cs" />
     <Compile Include="Engine\Camera\CameraBehaviour.cs" />
     <Compile Include="Engine\Camera\CameraMngr.cs" />
     <Compile Include="Engine\Camera\FollowPointBehaviour.cs" />
@@ -122,6 +123,11 @@
     <Compile Include="Maps\TmxTileLayer.cs" />
     <Compile Include="Maps\TmxTileObjectLayer.cs" />
     <Compile Include="Maps\TmxTileset.cs" />
+    <Compile Include="Objects\Button.cs" />
+    <Compile Include="Objects\Door.cs" />
+    <Compile Include="Objects\Key.cs" />
+    <Compile Include="Objects\Spike.cs" />
+    <Compile Include="Objects\Wall.cs" />
     <Compile Include="PowerUps\HealPowerUp.cs" />
     <Compile Include="PowerUps\PowerUp.cs" />
     <Compile Include="Program.cs" />
@@ -130,10 +136,20 @@
     <Compile Include="Scene\PlayScene.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\TitleScene.cs" />
+    <Compile Include="Scene\UnderScene\HouseScene.cs" />
+    <Compile Include="Scene\UnderScene\CaveScene.cs" />
+    <Compile Include="Scene\UnderScene\CityScene.cs" />
+    <Compile Include="Scene\UnderScene\UnderScene.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Assets\Maps\cave_map.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\Maps\house_map.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Assets\Maps\map_1.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -149,11 +165,42 @@
     <None Include="Assets\Maps\map_5.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Assets\Maps\map_6.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Actors\doggo_walk_atlas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Actors\hero_walk_L.png" />
+    <Content Include="Assets\Actors\hero_walk_D.png" />
+    <Content Include="Assets\Actors\hero_walk_R.png" />
+    <Content Include="Assets\Actors\hero_walk_U.png" />
     <Content Include="Assets\Actors\hero_idle_D.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Actors\hero_walk_atlas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\achieved.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\Forest Whisper.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\Key Jiggle.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\wall.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\stair_down.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\stair_up.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Maps\pixel_pack.png">
@@ -162,10 +209,43 @@
     <Content Include="Assets\Maps\pixel_pack_but_better.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Objects\backgr.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\buttons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\cave_door.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\door.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\gameOverBg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\house_door.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Audio\hurt.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\key.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Objects\loadingBar_bar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Objects\loadingBar_frame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\backg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\spike.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Objects\wall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Text\comics.png">
